@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{  url_for('resume.static', filename='styles.css')  }}">
     <title>{% block title %}Резюме{% endblock %}</title>
     
 </head>
@@ -11,12 +11,12 @@
 <header>
     <h1>{{ name }}</h1>
 </header>
-{% include 'navigation.html' %}
-<img src="{{ url_for('static', filename='images/img.jpg') }}" alt="Профільне зображення">
+{% include 'resume/navigation.html' %}
+<img src="{{ url_for('resume.static', filename='images/img.jpg') }}" alt="Профільне зображення">
 <main>
     {% block content %}{% endblock %}
 </main>
-{% include 'footer.html' %}
+{% include 'resume/footer.html' %}
 
 </body>
 </html>
