@@ -1,0 +1,16 @@
+body, .cookie-container, .cookie-container form{
+    background-color: #555 !important;
+    color:#f1f1f1;
+}
+
+.container p, .container h1, .container h2{
+    color:#f1f1f1 !important;
+}
+
+.cookiesTable{
+    color:black !important;
+}
+
+footer{
+    background-color: #333 !important;
+}

@@ -1,0 +1,147 @@
+
+
+main {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h2 {
+    color: #4CAF50;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.container p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+
+a {
+    text-decoration: none;
+}
+
+.cookie-container {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    padding: 15px;
+    color: #333;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.cookie-container h1, .cookie-container h2 {
+    color: #333;
+    font-size: 1.2em; /* Зменшено розмір */
+}
+
+.cookie-container form {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cookie-container label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px; /* Зменшено відступ */
+}
+
+.cookie-container input[type="text"],
+.cookie-container input[type="number"] {
+    width: 100%;
+    padding: 8px; /* Зменшено padding */
+    margin-bottom: 12px; /* Зменшено відступ */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px; /* Зменшено шрифт */
+}
+
+.cookie-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 18px; /* Зменшено padding */
+    border-radius: 4px;
+    font-size: 14px; /* Зменшено шрифт */
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.cookie-container button:hover {
+    background-color: #0056b3;
+}
+
+.cookie-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px; /* Зменшено відступ */
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+}
+
+.cookie-container table th, .cookie-container table td {
+    padding: 10px; /* Зменшено padding */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.cookie-container table th {
+    background-color: #f4f4f9;
+}
+
+.cookie-container table td{
+    width: 500px !important;
+    height: min-content;
+    word-wrap: break-word;  /* Переносимо текст, якщо він не вміщується */
+    overflow-wrap: break-word;            
+}
+
+.cookie-container table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.cookie-container hr {
+    border: 1px solid #ddd;
+    margin: 15px 0; /* Зменшено відступ */
+}
+
+.cookie-container #deleteAllCookiesBtn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 18px; /* Зменшено padding */
+    border-radius: 4px;
+    font-size: 14px; /* Зменшено шрифт */
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.cookie-container #deleteAllCookiesBtn:hover {
+    background-color: #c82333;
+}

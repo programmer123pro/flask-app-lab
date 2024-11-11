@@ -5,21 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %} {% endblock %} - FlaskApp </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header class="bg-dark text-white p-3">
-        <div class="container">
+        <div class="Flask">
             <h1>Flask Application</h1>
         </div>
-    </header>
+        <nav>
+            <ul>
+            <li><a href="/users/">Головна</a></li>
+            <li><a href="/resume">Резюме</a></li>
+            <li><a href="/users/login">Вхід</a></li>
+            <li><a href="/users/profile">Профіль</a></li>
+            </ul>
+        </nav>
+    </header> 
     
     <div class="container">
+        
         {% block content %}
         
         {% endblock %}
     </div>
-    <footer class="bg-light text-center py-4">
+    <footer class="text-center py-4">
         <p>&copy; 2024 Flask App. All rights reserved.</p>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -1,0 +1,82 @@
+    {% extends 'base.html' %}
+    {% block title %} Profile {% endblock %}
+
+    {% block content %}
+
+    {% include 'flash_template.html' %}
+
+    {% if dark_theme %}
+    <link rel="stylesheet" href="{{ url_for('users.static', filename='profile_styles_dark.css') }}">
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('users.static', filename='profile_styles.css') }}">
+
+    <div>
+        <a href="{{ url_for('users.theme') }}" class="btn btn-danger mt-3">Змінити тему</a>
+    </div>
+
+    <div class="profile-container mt-4">
+        <h2>Ласкаво просимо, {{ username }}!</h2>
+        <p>Це ваш профіль. Тут ви можете переглянути свої дані та вийти з облікового запису.</p>
+        <a href="{{ url_for('users.logout') }}" class="btn btn-danger mt-3">Вийти</a>
+    </div>
+    
+<!-- Секція для роботи з кукі, яку можна вставити в будь-яку сторінку -->
+<div class="cookie-container">
+    <h1>Форма для роботи з кукі</h1>
+
+    <!-- Форма для додавання куки -->
+    <h2>Додати кукі</h2>
+    <form id="addCookieForm" action="/users/cookies" method="post">
+        <label for="cookieKey">Ключ куки:</label>
+        <input type="hidden" name="_method" value="POST">
+        <input type="text" id="cookieKey" name="cookieKey" required><br>
+
+        <label for="cookieValue">Значення куки:</label>
+        <input type="text" id="cookieValue" name="cookieValue" required><br>
+
+        <label for="cookieExpires">Термін (дні):</label>
+        <input type="number" id="cookieExpires" name="cookieExpires" min="1" required><br>
+
+        <button type="submit">Додати кукі</button>
+    </form>
+
+    <!-- Форма для видалення куки за ключем -->
+    <h2>Видалити кукі за ключем</h2>
+    <form id="deleteCookieForm" action="/users/cookies" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <label for="deleteKey">Ключ куки для видалення:</label>
+        <input type="text" id="deleteKey" name="deleteKey" required><br><br>
+
+        <button type="submit">Видалити кукі</button>
+    </form>
+
+    <!-- Кнопка для видалення всіх кукі -->
+    <form action="/users/cookies" method="post">
+    <h2>Видалити всі кукі</h2>
+    <input type="hidden" name="_method" value="ALL_DELETE">
+    <button id="deleteAllCookiesBtn" type="submit">Видалити всі кукі</button>
+    </form>
+    <hr>
+
+    <!-- Таблиця для відображення всіх кукі -->
+    <h2>Таблиця кукі</h2>
+    <table id="cookiesTable">
+        <thead>
+            <tr>
+                <th>Ключ</th>
+                <th>Значення</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cookie in cookies %}
+            <tr>
+                <td>{{ cookie[0] }}</td>
+                <td>{{ cookie[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
