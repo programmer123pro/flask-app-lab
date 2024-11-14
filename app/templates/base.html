@@ -18,12 +18,24 @@
             <li><a href="/resume">Резюме</a></li>
             <li><a href="/users/login">Вхід</a></li>
             <li><a href="/users/profile">Профіль</a></li>
+            <li><a href="/posts">Пости</a></li>
             </ul>
         </nav>
     </header> 
     
     <div class="container">
         
+            <!-- Відображення Flash-повідомлень -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} mt-3">
+    {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
         {% block content %}
         
         {% endblock %}

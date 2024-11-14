@@ -11,4 +11,5 @@ app.register_blueprint(resume_bp)
 from .users import users_bp
 app.register_blueprint(users_bp)
 
-app.jinja_env.cache = {}
+from .posts import posts_bp
+app.register_blueprint(posts_bp)

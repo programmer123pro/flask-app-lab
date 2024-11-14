@@ -35,7 +35,7 @@ def login():
                 flash('Login successfull', 'success')
                 return redirect(url_for('users.profile'))
             else:   
-               flash('Login failed. Please try again.', 'error') 
+               flash('Login failed. Please try again.', 'danger') 
     
     return render_template("login.html")
 

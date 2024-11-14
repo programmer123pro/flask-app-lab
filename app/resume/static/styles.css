@@ -73,3 +73,7 @@ body {
                 margin: 10px 0;
             }
         }
+    
+    img{
+        width: 100%;
+    }

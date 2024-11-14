@@ -3,8 +3,6 @@
 
     {% block content %}
 
-    {% include 'flash_template.html' %}
-
     {% if dark_theme %}
     <link rel="stylesheet" href="{{ url_for('users.static', filename='profile_styles_dark.css') }}">
     {% endif %}

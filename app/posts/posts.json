@@ -1,0 +1,20 @@
+[
+    {
+        "author": "taras",
+        "category": "test",
+        "content": "Content",
+        "id": 0,
+        "is_active": true,
+        "publication_date": "2024-11-13",
+        "title": "Title"
+    },
+    {
+        "author": "\u041d\u0435\u0432\u0456\u0434\u043e\u043c\u0438\u0439",
+        "category": "test",
+        "content": "content1",
+        "id": 1,
+        "is_active": true,
+        "publication_date": "2024-11-14",
+        "title": "title1"
+    }
+]
