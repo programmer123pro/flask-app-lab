@@ -6,16 +6,22 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link href="{{ url_for('posts.static', filename='styles.css') }}" rel="stylesheet">
 
-<div class="row mt-n5 posts">
-    
-    <a class="btn btn-danger mt-3" href="{{ url_for('posts.add_post') }}" type="submit">Додати пост</a>
 
+<div class="row mt-n5 posts">
+
+    <h1 class="myclass">Статті</h1>
+    
+    <form action="{{ url_for('posts.add_post') }}" class="mb-4" method="get">
+    <button class="btn btn-danger mt-3" type="submit">Додати пост</button>
+    </form>
+    
     {% for post in posts %}
     <div class="col-md-6 col-lg-4 mt-5 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
         <div class="blog-grid">
+            <div class="blog-grid-img position-relative"><img alt="img" src="{{ url_for('posts.static', filename='delault.png') }}"></div>
             <div class="blog-grid-text p-4">
                 <h3 class="h5 mb-3"><a href="#!">{{ post.title }}</a></h3>
-                <p class="display-30">{{ post.content }}</p>
+                <p class="display-30">{{ post.content | truncate(23) }}</p>
                 <div class="meta meta-style2">
                     <ul>
                         <li><a href="#!"><i class="fas fa-comments"></i>{{ post.category }}</a></li>

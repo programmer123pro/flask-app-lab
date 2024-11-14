@@ -43,7 +43,7 @@
     margin-bottom: 0;
     font-weight: 500
 }
-
+ 
 .blog-grid-text .meta-style2 ul li:last-child {
     margin-right: 0
 }
@@ -226,4 +226,8 @@ a, a:active, a:focus {
 
 .posts{
     margin-top: 20px !important;
+}
+
+.myclass{
+    background-color: #bbff00;
 }
