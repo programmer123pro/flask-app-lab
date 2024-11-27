@@ -16,5 +16,14 @@
         "is_active": true,
         "publication_date": "2024-11-14",
         "title": "title1"
+    },
+    {
+        "author": "\u041d\u0435\u0432\u0456\u0434\u043e\u043c\u0438\u0439",
+        "category": "test",
+        "content": "content3",
+        "id": 2,
+        "is_active": true,
+        "publication_date": "2024-11-27",
+        "title": "title3"
     }
 ]
