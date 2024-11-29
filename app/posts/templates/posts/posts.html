@@ -11,9 +11,15 @@
 
     <h1 class="myclass">Статті</h1>
     
-    <form action="{{ url_for('posts.add_post') }}" class="mb-4" method="get">
-    <button class="btn btn-danger mt-3" type="submit">Додати пост</button>
-    </form>
+    <div class="buttons">
+        <form action="{{ url_for('posts.add_post') }}" class="mb-4" method="get">
+        <button class="btn btn-danger mt-3" type="submit">Додати пост</button>
+        </form>
+
+        <form action="{{ url_for('posts.delete_post') }}" class="mb-4" method="get">
+            <button class="btn btn-danger mt-3" type="submit">Видалити пост</button>
+        </form>
+    </div>
     
     {% for post in posts %}
     <div class="col-md-6 col-lg-4 mt-5 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
@@ -24,11 +30,16 @@
                 <p class="display-30">{{ post.content | truncate(23) }}</p>
                 <div class="meta meta-style2">
                     <ul>
-                        <li><a href="#!"><i class="fas fa-comments"></i>{{ post.category }}</a></li>
-                        <li><a href="#!"><i class="fas fa-calendar-alt"></i>{{ post.publication_date }}</li>
-                        <li><a href="#!"><i class="fas fa-user"></i>{{ post.author }}</a></li>
+                        <li><a href="#!"><i class="fas fa-comments">Категорія: {{ post.category }}</i></a></li><br>
+                        <li><a href="#!"><i class="fas fa-calendar-alt">Дата публікації: {{ post.date }}</i></a></li>
+                        <li><a href="#!"><i class="fas fa-user">Автор: {{ post.author }}</i></a></li>
                     </ul>
                 </div>
+                <a href="/posts/{{ post.id }}">
+                    <div class="view_post">
+                        Переглянути пост
+                    </div>
+                </a>
             </div>
         </div>
     </div>

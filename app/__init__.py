@@ -1,14 +1,26 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from sqlalchemy.orm import DeclarativeBase
 
-def create_app(config_name='../config.py'):
+class Base(DeclarativeBase):
+    pass    
+
+db = SQLAlchemy(model_class=Base)
+migrate = Migrate()
+
+def create_app(config_name='config'):
 
     app = Flask(__name__, template_folder="templates")
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.config.from_pyfile(config_name)
+    app.config.from_object(config_name)
+
+    from .posts.models import Post
+    db.init_app(app)
+    migrate.init_app(app, db)
 
     with app.app_context():
         from . import views
-
+    
         from .resume import resume_bp
         app.register_blueprint(resume_bp)
 

@@ -20,7 +20,7 @@
 }
 
 .blog-grid-text {
-    position: relative
+    position: relative;
 }
 
 .blog-grid-text>span {
@@ -162,7 +162,7 @@ a, a:active, a:focus {
 .pagination {
     border-radius: 0;
     padding: 0;
-    margin: 0
+    margin: 0;
 }
 
 .pagination ul {
@@ -170,11 +170,11 @@ a, a:active, a:focus {
     *display: inline;
     *zoom: 1;
     margin: 0 auto;
-    padding: 0
+    padding: 0;
 }
 
 .pagination li {
-    display: inline
+    display: inline;
 }
 
 .pagination a {
@@ -184,7 +184,7 @@ a, a:active, a:focus {
     text-decoration: none;
     border: 1px solid #dbdbdb;
     border-left-width: 0;
-    background: #fff
+    background: #fff;
 }
 
 .pagination a:hover {
@@ -195,7 +195,7 @@ a, a:active, a:focus {
 .pagination .active a {
     background-color: #f7f7f7;
     color: #999;
-    cursor: default
+    cursor: default;
 }
 
 .pagination .disabled span {
@@ -207,17 +207,17 @@ a, a:active, a:focus {
 .pagination .disabled a {
     color: #999;
     background-color: transparent;
-    cursor: default
+    cursor: default;
 }
 
 .pagination .disabled a:hover {
     color: #999;
     background-color: transparent;
-    cursor: default
+    cursor: default;
 }
 
 .pagination li:first-child a {
-    border-left-width: 1px
+    border-left-width: 1px;
 }
 
 .mt-6, .my-6 {
@@ -230,4 +230,48 @@ a, a:active, a:focus {
 
 .myclass{
     background-color: #bbff00;
+}
+
+.view_post{
+    border:#292dc2 1px solid;
+    color:#292dc2;
+    width:max-content;
+    padding: 10px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.form-group input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+.form-group input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.form{
+    margin-top: 20px;
+    width:400px;
+}
+
+h3{
+    text-align: center;
+}
+
+.buttons form{
+    display: inline;
+    margin-right: 50px;
 }

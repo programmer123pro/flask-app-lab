@@ -2,66 +2,103 @@ from flask import *
 from . import posts_bp
 from .forms import PostForm
 from datetime import datetime 
-
-class Post:
-    _lastId = 0
-    _post = dict()
-
-    def __init__(self, title, content, category, is_active, date, author):
-        self.title = title
-        self.content = content
-        self.category = category
-        self.is_active = is_active
-        self.publication_date = str(date)
-        self.author = author
-    
-    def save(self):
-        file = open('app/posts/posts.json ', 'r+')
-        posts = json.load(file)
-        if(len(posts) > 0):
-            id = posts[-1]['id'] + 1
-        else:
-            id = 0
-
-        post = {
-            'id' : id,
-            'title' : self.title,
-            'content' : self.content,
-            'category' : self.category,
-            'is_active' : self.is_active,
-            'publication_date' : self.publication_date,
-            'author' : self.author
-        }
-
-        posts.append(post)
-        file.seek(0)
-        json.dump(posts, file, indent=4)
+from .models import Post
+from app import db
 
 @posts_bp.route('/')
 def posts():
-    file = open('app/posts/posts.json ', 'r')
-    posts = json.load(file)
-    return render_template('posts.html', posts=posts)
+    stmt = db.select(Post).order_by(Post.posted.asc())
+    posts = db.session.scalars(stmt)
+    postsDict = []
+    for post in posts:
+        postsDict.append({
+            'title' : post.title,
+            'content' : post.content,
+            'date' : post.posted.strftime("%Y-%m-%d %H:%M"),
+            'category' : (post.category if post.category else ''),
+            'author' : (post.author if post.author else 'Невідомий'),
+            'id' : post.id
+        })
+
+    return render_template('posts.html', posts=postsDict)
 
 @posts_bp.route('/add_post', methods=['GET', 'POST'])
 def add_post():
     form = PostForm()
-    if form.validate_on_submit():
-        if('username' in session):
-            author = session['username']
-        else:
-            author = 'Невідомий'
-
+    if form.validate_on_submit(): 
         post = Post(
-                form.title.data,
-                form.content.data,
-                form.category.data,
-                form.is_active.data,
-                form.publish_date.data,
-                author
+                title = form.title.data,
+                content = form.content.data,
+                category = form.category.data,
+                is_active = form.is_active.data,
+                posted = form.publish_date.data,
+                author = (session['username'] if 'username' in session else 'Невідомий')
         )
-        post.save()
+        db.session.add(post)
+        db.session.commit()
 
         flash('Post added successfully!', 'success')
         return redirect(url_for('posts.add_post'))
+    
     return render_template('add_post.html', form=form)
+
+@posts_bp.route('/<int:id>')
+def view_post(id):
+    post = db.get_or_404(Post, id)
+    postDict = {
+            'title' : post.title,
+            'content' : post.content,
+            'date' : post.posted.strftime("%Y-%m-%d %H:%M"),
+            'category' : (post.category if post.category else ''),
+            'author' : (post.author if post.author else 'Невідомий'),
+            'id' : post.id
+        }
+
+    return render_template('post.html', post=postDict)
+
+@posts_bp.route('/delete')
+def delete_post():
+    if('id' in request.args):
+        try:
+            id = int(request.args.get('id'))
+        except ValueError:
+            flash('Enter valid integer', 'danger')    
+        else:
+            post = db.session.get(Post, id)
+            if post:
+                db.session.delete(post)
+                db.session.commit()
+                flash('Delete successfull', 'success')
+            else:
+                flash('Such post does not exist', 'danger')
+            return redirect(url_for(".delete_post"))
+
+    return render_template('delete_post.html')
+
+@posts_bp.route("/edit/<int:id>", methods=["POST", "GET"])
+def edit_post(id):
+    post = db.get_or_404(Post, id)
+    form = PostForm()
+
+    if(request.method == "GET"):
+        form.init(
+            title = post.title,
+            content = post.content,
+            category = post.category,
+            publish_date = post.posted,
+            is_active = post.is_active
+        )
+        return render_template("edit_post.html", form=form)
+    
+    elif(request.method == "POST"):
+        if form.validate_on_submit(): 
+            post.title = form.title.data
+            post.content = form.content.data
+            post.category = form.category.data
+            post.is_active = form.is_active.data
+            post.posted = form.publish_date.data
+            post.author = (session['username'] if 'username' in session else 'Невідомий')
+            db.session.commit()
+            flash('Post edited successfull', 'success')     
+
+        return redirect(url_for('.edit_post', id=id))
