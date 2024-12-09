@@ -16,6 +16,7 @@
     <div>
         <p><b>Дата публікації: {{ post.date }}</b></p>
         <p><i>Автор: {{ post.author }}</i></p>
+        <p><b>Теги: </b>{% for tag in post.tags %} {{tag}} |{% endfor %}</p>
     </div>
 </div>
 
