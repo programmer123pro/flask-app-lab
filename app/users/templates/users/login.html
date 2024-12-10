@@ -1,42 +1,14 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('users.static', filename='login_styles.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Форма входу</title>
-</head>
-<body>
-    
-    <!-- {% include 'flash_template.html' %} -->
-     <!-- Відображення Flash-повідомлень -->
-    {% with messages = get_flashed_messages(with_categories=True) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    <div class="alert alert-{{ category }} mt-3">
-    {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}     
+{% extends 'base.html' %}
 
-    <div class="login-container">
-        <h2>Вхід</h2>
-        <form action="/users/login" method="POST">
-            <div class="form-group">
-                <label for="username">Користувач:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Увійти">
-            </div>
-        </form>
-    </div>
-</body>
-</html>
-
+{% block content %}
+<h2>LOGIN</h2>
+<form method="POST" action="" novalidate>
+{{ form.hidden_tag() }}
+{% from 'form_macros.html' import render_field %}
+{{ render_field(form.username) }}
+{{ render_field(form.password) }}
+<div class='form-group'>
+    {{ form.submit(class='btn btn-primary') }}  
+</div>  
+</form>
+{% endblock %}

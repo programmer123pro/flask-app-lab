@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2><b>Список всіх користувачів:</b></h2>
+<div>
+    {% if users %}
+    <table class="users">
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Користувачів ще немає!</p>
+    {% endif %}
+</div>
+{% endblock %}

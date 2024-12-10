@@ -16,9 +16,15 @@
             <ul>
             <li><a href="/users/">Головна</a></li>
             <li><a href="/resume">Резюме</a></li>
-            <li><a href="/users/login">Вхід</a></li>
+            {% if logined %}
             <li><a href="/users/profile">Профіль</a></li>
+            <li><a href="/users/logout">Вихід</a></li>
+            {% else %}
+            <li><a href="/users/login">Вхід</a></li>
+            <li><a href="/users/sign_up">Реєстрація</a></li>
+            {% endif %}
             <li><a href="/posts">Пости</a></li>
+            <li><a href="/users/all_users">Усі користувачі</a></li>
             </ul>
         </nav>
     </header> 

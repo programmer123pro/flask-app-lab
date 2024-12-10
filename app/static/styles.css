@@ -47,3 +47,14 @@ html, body {
     text-align: center;
     color: #f8f9fa;
   }
+
+
+.users{
+  width:60%;
+}
+ 
+.users th, td {
+      border: 1px solid #000; /* Чорна рамка для клітинок */
+      padding: 10px; /* Відступи всередині клітинок */
+      text-align: left; /* Текст вирівняний по лівому краю */
+}

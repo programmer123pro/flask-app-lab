@@ -13,8 +13,9 @@
     </div>
 
     <div class="profile-container mt-4">
-        <h2>Ласкаво просимо, {{ username }}!</h2>
+        <h2>Ласкаво просимо, {{ user.username }}!</h2>
         <p>Це ваш профіль. Тут ви можете переглянути свої дані та вийти з облікового запису.</p>
+        <p>Email: {{ user.email }}</p>
         <a href="{{ url_for('users.logout') }}" class="btn btn-danger mt-3">Вийти</a>
     </div>
     
