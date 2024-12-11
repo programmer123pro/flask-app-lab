@@ -1,3 +1,4 @@
+import os
 from flask import *
 from . import users_bp
 from .forms import *
@@ -51,7 +52,41 @@ def profile():
     dark_theme = False 
     if ('theme' in request.cookies) and (request.cookies['theme'] == 'dark'):
         dark_theme = True
-    return render_template("profile.html", user=current_user, cookies=cookies, dark_theme=dark_theme, logined = current_user.is_authenticated)
+    form = UpdateAcountForm()
+    form.email.data = current_user.email
+    form.old_email.data = current_user.email
+    form.username.data = current_user.username
+    form.about_me.data = current_user.about_me
+    current_user.last_seen = dt.now()
+    db.session.commit()
+    return render_template("profile.html", user=current_user, cookies=cookies,dark_theme=dark_theme,
+                           logined = current_user.is_authenticated, form=form)
+
+@users_bp.route('/profile/update', methods=['POST'])
+@login_required
+def update_profile():
+    user = current_user
+    form = UpdateAcountForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        file = form.image.data
+        user.username = username
+        user.about_me = form.about_me.data
+        user.email = email
+        if file:
+                file.save(os.path.join('app/users/static/images/', file.filename))
+                user.image_file = file.filename
+        db.session.commit()
+        flash('Профіль успішно оновлено', 'success')
+        return redirect(url_for('.profile'))
+    else:
+        cookies = list(request.cookies.items())
+        dark_theme = False 
+        if ('theme' in request.cookies) and (request.cookies['theme'] == 'dark'):
+            dark_theme = True
+        return render_template("profile.html", user=current_user, cookies=cookies,dark_theme=dark_theme,
+                           logined = current_user.is_authenticated, form=form)
 
 @users_bp.route('/logout')
 def logout():
@@ -123,9 +158,19 @@ def show_all_users():
         return render_template("all_users.html", users=users, logined = current_user.is_authenticated)
     else: 
         return render_template("all_users.html", users=None, logined = current_user.is_authenticated)
-        
 
-            
-        
 
-            
+@users_bp.route('/change_password/', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if request.method == 'GET':
+        return render_template("change_password.html", form=form)
+    elif request.method == 'POST':
+        if form.validate_on_submit():
+            current_user.password = form.password.data
+            current_user.hash_password()
+            db.session.commit()
+            flash('Пароль успішно змінений', 'success')
+            return redirect(url_for('.change_password'))
+        return render_template('change_password', form=form)                

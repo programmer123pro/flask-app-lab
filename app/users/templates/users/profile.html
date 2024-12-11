@@ -13,16 +13,39 @@
     </div>
 
     <div class="profile-container mt-4">
-        <h2>Ласкаво просимо, {{ user.username }}!</h2>
-        <p>Це ваш профіль. Тут ви можете переглянути свої дані та вийти з облікового запису.</p>
-        <p>Email: {{ user.email }}</p>
-        <a href="{{ url_for('users.logout') }}" class="btn btn-danger mt-3">Вийти</a>
+        <div style="display:inline-block;"><img src="{{ url_for('.static', filename='images/'+(user.image_file if user.image_file else 'delault.png')) }}" style="width: 200px"></div>
+        <div>
+            <h2>{{ user.username }}</h2>
+            <div>{{ user.email }}</div>
+            <div>{{ user.about_me if user.about_me }}</div>
+        </div>
     </div>
+    <a href="{{ url_for('users.logout') }}" class="btn btn-danger mt-3">Вийти</a>
+    <a href="{{ url_for('users.change_password') }}" class="btn btn-danger mt-3">Змінити пароль</a>
     
+    <div style="margin-top: 50px;">
+        <h2>Оновити профіль:</h2>
+    <form method="POST" action="{{ url_for('.update_profile') }}" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        {% from 'form_macros.html' import render_field %}
+        {{ render_field(form.username) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.old_email) }}
+        {{ render_field(form.about_me) }}
+        <!-- {{ render_field(form.image) }} -->
+        <div class="form-group">
+            {{ form.image.label() }}  
+            {{ form.image() }}
+        </div>
+        <div class='form-group'>
+            {{ form.submit(class='btn btn-primary') }}  
+        </div>
+    </form>
+    </div>
+
 <!-- Секція для роботи з кукі, яку можна вставити в будь-яку сторінку -->
 <div class="cookie-container">
     <h1>Форма для роботи з кукі</h1>
-
     <!-- Форма для додавання куки -->
     <h2>Додати кукі</h2>
     <form id="addCookieForm" action="/users/cookies" method="post">

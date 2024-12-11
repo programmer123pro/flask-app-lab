@@ -145,3 +145,16 @@ a {
 .cookie-container #deleteAllCookiesBtn:hover {
     background-color: #c82333;
 }
+
+.profile-container{
+    display: flex;
+    justify-content:flex-start;
+    gap:20px;   
+}
+
+.profile-container div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
