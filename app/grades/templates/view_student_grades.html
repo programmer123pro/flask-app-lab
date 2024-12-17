@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Додавання Bootstrap класів для заголовку та таблиці -->
+<div class="container mt-4">
+    <h3 class="mb-4" style="font-size: 1.6rem;">Оцінки</h3>
+
+    <p class="lead" style="font-size: 1.2rem;"><strong>Група:</strong> {{ student.group }}</p>
+    <p class="lead" style="font-size: 1.2rem;"><strong>Ім'я та Прізвище:</strong> {{ student.name }} {{ student.surname }}</p>
+
+    <!-- Стилізована таблиця з класами Bootstrap -->
+    <table class="table table-bordered table-striped" style="font-size: 1.1rem;">
+        <thead class="thead-dark">
+            <tr>
+                <th>Предмет</th>
+                <th>Оцінка</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in student.grades %}
+            <tr>
+                <td>{{ grade.subject }}</td>
+                <td>{{ grade.grade }}</td>
+                <td>
+                    <!-- Дії в таблиці: Редагувати та Видалити -->
+                    <a href="{{ url_for('.edit', id=grade.id) }}" class="btn btn-primary btn-sm" style="font-size: 1rem;">Редагувати</a>
+                    <a href="{{ url_for('.delete', id=grade.id) }}" class="btn btn-danger btn-sm ml-2" style="font-size: 1rem;">Видалити</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

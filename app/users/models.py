@@ -14,10 +14,10 @@ class User(db.Model, UserMixin):
     password=db.Column(db.String(60), nullable=False)
     image_file = db.Column(db.String(20), nullable=True, default='default.jpg')
     about_me = db.Column(db.String(100), nullable=True)
-    last_seen = db.Column(db.DateTime, nullable=True)
+    last_seen = db.Column(db.DateTime, nullable=True) 
 
     def __repr__(self) -> str:
-        return f"User('{self.email}')"
+        return f"User('{self.email}')"                      
     
     def hash_password(self):
         hashed_password = bcrypt.generate_password_hash(self.password)

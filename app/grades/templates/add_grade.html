@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<form method="POST" action="" novalidate>
+{{ form.hidden_tag() }}
+{% from 'form_macros.html' import render_field %}
+{{ render_field(form.student_group) }}
+{{ render_field(form.student_name) }}
+{{ render_field(form.student_surname) }}
+{{ render_field(form.subject) }}
+{{ render_field(form.grade) }}
+<div class='form-group'>
+    {{ form.submit(class='btn btn-primary') }}  
+</div>  
+</form>
+{% endblock %}

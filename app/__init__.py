@@ -20,6 +20,7 @@ def create_app(config_name='config.DevConfig'):
 
     from .posts.models import Post
     from .users.models import User
+    from .grades.models import Grade, Subject, Student
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
@@ -40,5 +41,8 @@ def create_app(config_name='config.DevConfig'):
 
         from .posts import posts_bp
         app.register_blueprint(posts_bp)
+
+        from .grades import grades_bp
+        app.register_blueprint(grades_bp)
     
     return app

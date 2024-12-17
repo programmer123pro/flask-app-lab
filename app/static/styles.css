@@ -58,3 +58,8 @@ html, body {
       padding: 10px; /* Відступи всередині клітинок */
       text-align: left; /* Текст вирівняний по лівому краю */
 }
+
+.student_grades, .student_grades tr, td{
+  border:none;
+  padding:15px;
+}

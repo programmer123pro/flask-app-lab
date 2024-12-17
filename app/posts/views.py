@@ -7,7 +7,7 @@ from app import db
 from app.users.models import User
 from app.posts.models import Tag
 
-@posts_bp.route('/')
+@posts_bp.route('/')    
 def posts():
     stmt = db.select(Post).order_by(Post.posted.asc())
     posts = db.session.scalars(stmt)
